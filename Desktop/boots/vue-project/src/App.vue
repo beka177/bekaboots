@@ -36,8 +36,10 @@
     Featured
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <h5 class="card-title">Redmi 10 c</h5>
+    <p class="card-text">20.12.25</p>
+    <p class="card-text">150$</p>
+    <p class="card-text">x10</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
   <div class="card-footer text-body-secondary">
@@ -45,6 +47,11 @@
   </div>
 </div>
     
+<div class="row my-4">
+    <div class="col">
+        <h3 class="text-end">Total summary: $1234</h3>
+    </div>
+</div>
 </div>
 
 </template>
