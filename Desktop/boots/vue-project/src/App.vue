@@ -68,19 +68,31 @@ let totalSum = computed(() => {
             <form action="">
                 <div class="mb-3">
                     <label for="date" class="form-label">Название</label>
-                    <input type="text"  class="form-control" id="name" v-model="name"> 
+                    <input type="text"  class="form-control" :class="{'is-invalid' : !name}" id="name" v-model="name"> 
+                    <div class="invalid-feedback">
+                     имя напиши лол
+                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Дата</label>
-                    <input type="date" class="form-control" id="name" v-model="date" >
+                    <input type="date" class="form-control" :class="{'is-invalid' : !name}" id="name" v-model="date" >
+                    <div class="invalid-feedback">
+                    а когда...
+                      </div>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Количество</label>
-                    <input type="number" class="form-control" id="name" v-model="count">
+                    <input type="number" class="form-control" :class="{'is-invalid' : !count}" id="name" v-model="count">
+                    <div class="invalid-feedback">
+                        напиши число лол
+                    </div>    
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Цена</label>
-                    <input type="number" class="form-control" id="name" v-model="price">
+                    <input type="number" class="form-control" :class="{'is-invalid' : !name}" id="name" v-model="price">
+                    <div class="invalid-feedback">
+                    скоко!?!??!?!
+                    </div>
                 </div>
                 <div class="text-center mb-3">
                     <button @click="addProduct" type="button" class="btn btn-dark">Добавить</button>
@@ -90,7 +102,7 @@ let totalSum = computed(() => {
         </div>
     </div>
     <div class="row">
-        <div class="col" v-for="i in products" :keys="products.id" >
+        <div class="col" v-for="i in products" :keys="i.id" >
             <div class="card text-center">
   <div class="card-header">
     Featured
@@ -104,7 +116,7 @@ let totalSum = computed(() => {
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
   <div class="text-center mb-3">  
-                    <button @click="removeProduct(product.id)" type="button" class="btn btn-light">delete</button>
+                    <button @click="removeProduct(i.id)" type="button" class="btn btn-light">delete</button>
     </div>
   <div class="card-footer text-body-secondary">
     2 days ago
