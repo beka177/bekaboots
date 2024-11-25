@@ -1,5 +1,62 @@
 <script setup>
+        import { ref, computed } from "vue";        
+    let products = ref([
+        {
+            id: 1,
+            name: 'redmi',
+            date: '20.11.2023',
+            count: 20,
+            price: 10,
+        },
+        {
+            id: 2,
+            name: 'nokia',
+            date: '20.11.2013',
+            count: 200,
+            price: 190,
+        },
+/*         {
+            id: 3,
+            name: 'google',
+            date: '20.10.2013',
+            count: 2300,
+            price: 90,
+        },
+        {
+            id: 4,
+            name: 'momo',
+            date: '10.11.2013',
+            count: 203,
+            price: 1970,
+        },         */
+])
+let name = ref('lol');
+let date = ref('');
+let count = ref(1);
+let price = ref(0);
 
+let addProduct = () => {
+    if (name.value && date.value && count.value && price.value) {
+        products.value.push(
+            {
+            id: Date.now(),
+            name: name.value,
+            date: (new Date(date.value)).toLocaleDateString(),
+            count: count.value,
+                price: price.value,
+        },   
+        )
+    }
+}
+
+let removeProduct = (id) => {
+    products.value = products.value.filter((product) => product.id != id);
+}
+
+
+let totalSum = computed(() => {
+    return products.value.reduce((sum, product) => sum + (product.price * product.count), 0)
+})
 </script>
 
 <template>
@@ -11,45 +68,55 @@
             <form action="">
                 <div class="mb-3">
                     <label for="date" class="form-label">Название</label>
-                    <input type="text" class="form-control" id="name" >
+                    <input type="text"  class="form-control" id="name" v-model="name"> 
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Дата</label>
-                    <input type="date" class="form-control" id="name" >
+                    <input type="date" class="form-control" id="name" v-model="date" >
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Количество</label>
-                    <input type="number" class="form-control" id="name" >
+                    <input type="number" class="form-control" id="name" v-model="count">
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Цена</label>
-                    <input type="number" class="form-control" id="name" >
+                    <input type="number" class="form-control" id="name" v-model="price">
                 </div>
                 <div class="text-center mb-3">
-                    <button type="button" class="btn btn-dark">Добавить</button>
+                    <button @click="addProduct" type="button" class="btn btn-dark">Добавить</button>
                 </div>
+
             </form>
         </div>
     </div>
-    <div class="card text-center">
+    <div class="row">
+        <div class="col" v-for="i in products" :keys="products.id" >
+            <div class="card text-center">
   <div class="card-header">
     Featured
   </div>
   <div class="card-body">
-    <h5 class="card-title">Redmi 10 c</h5>
-    <p class="card-text">20.12.25</p>
-    <p class="card-text">150$</p>
-    <p class="card-text">x10</p>
+    <h5 class="card-title">{{i.name}}</h5>
+    <p class="card-text">date:{{i.date}}</p>
+    <p class="card-text">${{i.price}}</p>
+    <p class="card-text">x{{i.count}}</p>
+
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
+  <div class="text-center mb-3">  
+                    <button @click="removeProduct(product.id)" type="button" class="btn btn-light">delete</button>
+    </div>
   <div class="card-footer text-body-secondary">
     2 days ago
   </div>
 </div>
+
+        </div>
+    </div>
     
 <div class="row my-4">
     <div class="col">
-        <h3 class="text-end">Total summary: $1234</h3>
+        <h3 class="text-end">Total summary: ${{ totalSum }}</h3>
     </div>
 </div>
 </div>
